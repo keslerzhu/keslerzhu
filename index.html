@@ -1,38 +1,396 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 <head>
-  <title>Kesler Zhu' Github</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101b2a">
+  <meta name="description" content="Ke Zhu — Systems engineering veteran, investor and advisor. 25+ years across IBM, Microsoft, cloud-native infrastructure, HPC, blockchain and AI.">
+  <title>Ke Zhu — Systems Engineer · Investor · Advisor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #152234;
+      --muted: #637184;
+      --paper: #f5f6f3;
+      --white: #ffffff;
+      --navy: #101b2a;
+      --navy-2: #17283c;
+      --line: #e3e8e5;
+      --lime: #c7f36b;
+      --lime-dark: #9dc84c;
+      --blue: #6c91b7;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "DM Sans", sans-serif;
+      --display: "Manrope", sans-serif;
+      --mono: "DM Mono", monospace;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .wrap { width: min(var(--max), calc(100% - 56px)); margin: 0 auto; }
+    .topbar { position: sticky; top: 0; z-index: 20; background: rgba(16,27,42,.94); backdrop-filter: blur(14px); color: white; border-bottom: 1px solid rgba(255,255,255,.09); }
+    .nav { height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 800; letter-spacing: -.04em; }
+    .brand-mark { display: grid; place-items: center; width: 35px; height: 35px; border-radius: 10px; color: var(--navy); background: var(--lime); font-size: 13px; letter-spacing: -.06em; }
+    .brand span:last-child { font-size: 15px; }
+    .nav-links { display: flex; align-items: center; gap: 27px; color: #c0cad4; font-size: 12px; letter-spacing: .02em; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--lime); }
+    .nav-cta { border: 1px solid rgba(199,243,107,.65); color: var(--lime); border-radius: 999px; padding: 10px 15px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .menu-toggle { display: none; border: 1px solid rgba(255,255,255,.2); color: white; background: transparent; border-radius: 8px; padding: 8px 11px; }
+    .hero { background: var(--navy); color: white; position: relative; overflow: hidden; }
+    .hero:before { content: ""; position: absolute; width: 650px; height: 650px; right: -180px; top: -280px; border: 1px solid rgba(199,243,107,.17); border-radius: 50%; box-shadow: 0 0 0 65px rgba(199,243,107,.025), 0 0 0 130px rgba(199,243,107,.02), 0 0 0 195px rgba(199,243,107,.015); }
+    .hero:after { content: ""; position: absolute; width: 340px; height: 340px; right: 7%; bottom: -250px; background: var(--lime); filter: blur(150px); opacity: .12; border-radius: 50%; }
+    .hero-inner { position: relative; z-index: 1; padding: 100px 0 92px; display: grid; grid-template-columns: 1.2fr .8fr; align-items: end; gap: 70px; }
+    .eyebrow { color: var(--lime); font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .eyebrow:before { content: ""; width: 28px; height: 1px; background: var(--lime); }
+    h1 { font-family: var(--display); font-size: clamp(54px, 7vw, 92px); line-height: .98; letter-spacing: -.075em; margin: 24px 0 25px; font-weight: 700; }
+    h1 .surname { color: var(--lime); }
+    .hero-lead { max-width: 670px; color: #c5ced8; font-size: clamp(16px, 1.6vw, 19px); line-height: 1.75; margin: 0; }
+    .hero-lead strong { color: white; font-weight: 600; }
+    .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 35px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; padding: 14px 20px; font-size: 12px; font-weight: 700; letter-spacing: .035em; transition: transform .2s, background .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--lime); color: var(--navy); }
+    .btn-ghost { color: white; border: 1px solid rgba(255,255,255,.25); }
+    .hero-aside { border-left: 1px solid rgba(255,255,255,.18); padding: 9px 0 8px 32px; margin-bottom: 4px; }
+    .hero-aside .aside-label { color: #8998a9; font: 10px var(--mono); letter-spacing: .13em; text-transform: uppercase; margin-bottom: 12px; }
+    .hero-aside .aside-title { font: 600 20px/1.35 var(--display); letter-spacing: -.04em; max-width: 290px; }
+    .hero-aside .aside-note { color: #9eacba; font-size: 12px; line-height: 1.7; margin-top: 14px; max-width: 280px; }
+    .metrics { background: #18283b; border-top: 1px solid rgba(255,255,255,.08); }
+    .metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+    .metric { padding: 24px 24px 26px 0; border-right: 1px solid rgba(255,255,255,.1); }
+    .metric:not(:first-child) { padding-left: 28px; }
+    .metric:last-child { border-right: 0; }
+    .metric strong { display: block; color: var(--lime); font: 700 28px var(--display); letter-spacing: -.06em; }
+    .metric span { display: block; color: #aeb9c5; margin-top: 5px; font-size: 11px; letter-spacing: .03em; }
+    section { padding: 100px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 48px; }
+    .section-kicker { color: #718091; font: 10px var(--mono); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 14px; }
+    h2 { font: 700 clamp(32px, 4vw, 48px)/1.08 var(--display); letter-spacing: -.065em; margin: 0; }
+    .section-intro { color: var(--muted); font-size: 14px; line-height: 1.75; max-width: 390px; margin: 0; }
+    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 90px; align-items: start; }
+    .about-statement { font: 400 clamp(26px, 3.3vw, 40px)/1.28 var(--serif); letter-spacing: -.035em; margin: 0; }
+    .about-statement em { color: #759a3d; font-style: normal; }
+    .about-copy { color: #5e6c7c; font-size: 15px; line-height: 1.9; margin: 0 0 18px; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 25px; }
+    .tag { border: 1px solid #dce3dc; border-radius: 999px; padding: 8px 12px; color: #526173; font-size: 11px; }
+    .expertise { background: #eceedf; }
+    .expertise-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: #d7dfd1; border: 1px solid #d7dfd1; }
+    .expertise-card { background: #eceedf; padding: 28px 25px 30px; min-height: 230px; }
+    .expertise-num { color: #8aa65d; font: 11px var(--mono); }
+    .expertise-card h3 { font: 700 18px var(--display); letter-spacing: -.04em; margin: 34px 0 12px; }
+    .expertise-card p { color: #637064; font-size: 12px; line-height: 1.8; margin: 0; }
+    .experience { background: var(--white); }
+    .timeline { position: relative; margin-left: 8px; }
+    .timeline:before { content: ""; position: absolute; left: 139px; top: 9px; bottom: 0; width: 1px; background: #dce3e8; }
+    .job { display: grid; grid-template-columns: 140px 1fr; gap: 42px; position: relative; padding: 0 0 48px; }
+    .job:last-child { padding-bottom: 0; }
+    .job:before { content: ""; position: absolute; left: 134px; top: 7px; width: 11px; height: 11px; border-radius: 50%; background: var(--lime-dark); border: 3px solid white; box-shadow: 0 0 0 1px #a8c47b; z-index: 1; }
+    .job-date { color: #84909c; font: 10px/1.6 var(--mono); letter-spacing: .02em; padding-top: 5px; }
+    .job-content { padding-left: 0; }
+    .job-top { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+    .job h3 { font: 700 22px var(--display); letter-spacing: -.05em; margin: 0; }
+    .job-role { color: #718091; font-size: 12px; margin-top: 5px; }
+    .job-badge { color: #68873e; background: #f0f6e6; border-radius: 999px; padding: 6px 10px; font: 10px var(--mono); }
+    .job ul { padding-left: 17px; margin: 19px 0 0; color: #5c6b7b; font-size: 13px; line-height: 1.85; max-width: 760px; }
+    .job li { padding-left: 4px; margin: 5px 0; }
+    .job li::marker { color: #9cbe5a; }
+    .highlights { background: var(--navy); color: white; }
+    .highlights .section-kicker { color: var(--lime); }
+    .highlights .section-intro { color: #aeb9c5; }
+    .highlights-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .highlight { border: 1px solid rgba(255,255,255,.12); padding: 27px 28px 30px; min-height: 180px; background: rgba(255,255,255,.025); transition: border-color .2s, transform .2s; }
+    .highlight:hover { border-color: rgba(199,243,107,.55); transform: translateY(-3px); }
+    .highlight .year { color: var(--lime); font: 11px var(--mono); }
+    .highlight h3 { font: 600 18px var(--display); letter-spacing: -.035em; margin: 22px 0 9px; }
+    .highlight p { color: #aeb9c5; font-size: 12px; line-height: 1.8; margin: 0; max-width: 480px; }
+    .foundations { background: #f5f6f3; }
+    .foundation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; }
+    .foundation-list { border-top: 1px solid #dce3df; }
+    .foundation-item { display: flex; gap: 22px; padding: 18px 0; border-bottom: 1px solid #dce3df; }
+    .foundation-item .mark { color: #8ba45d; font: 11px var(--mono); padding-top: 3px; }
+    .foundation-item strong { display: block; font: 600 14px var(--display); }
+    .foundation-item span { display: block; color: #758291; font-size: 11px; margin-top: 5px; line-height: 1.6; }
+    .education-card { background: #eceedf; padding: 30px; }
+    .education-card .label { color: #71865a; font: 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .education-card h3 { font: 700 20px var(--display); letter-spacing: -.04em; margin: 22px 0 8px; }
+    .education-card p { color: #647064; font-size: 12px; line-height: 1.8; margin: 0; }
+    .education-card .cert { border-top: 1px solid #d2dbc9; margin-top: 24px; padding-top: 20px; }
+    .contact { background: var(--navy-2); color: white; padding: 82px 0; }
+    .contact-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+    .contact .section-kicker { color: var(--lime); }
+    .contact h2 { max-width: 600px; }
+    .contact p { color: #b4c0cc; font-size: 13px; margin: 17px 0 0; line-height: 1.7; }
+    .contact-actions { display: flex; flex-direction: column; gap: 12px; min-width: 245px; }
+    .contact-link { display: flex; align-items: center; gap: 12px; border: 1px solid rgba(255,255,255,.2); border-radius: 10px; padding: 13px 15px; color: #e8edf1; font-size: 12px; transition: border .2s, color .2s; }
+    .contact-link:hover { border-color: var(--lime); color: var(--lime); }
+    .contact-link span { color: var(--lime); font: 11px var(--mono); }
+    footer { background: #0b1420; color: #7f8d9d; padding: 22px 0; font-size: 10px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-inner strong { color: #d7e0e8; font-weight: 600; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 850px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 45px; padding: 78px 0 70px; }
+      .hero-aside { border-left: 0; border-top: 1px solid rgba(255,255,255,.18); padding: 23px 0 0; }
+      .about-grid { gap: 45px; }
+      .expertise-grid { grid-template-columns: repeat(2,1fr); }
+      .contact-inner { align-items: flex-start; flex-direction: column; }
+      .contact-actions { width: 100%; max-width: 400px; }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 38px, var(--max)); }
+      .nav { height: 66px; }
+      .menu-toggle { display: block; }
+      .nav-links { display: none; position: absolute; top: 65px; left: 0; right: 0; padding: 18px 22px 22px; background: #101b2a; flex-direction: column; align-items: flex-start; gap: 18px; border-bottom: 1px solid rgba(255,255,255,.1); }
+      .nav-links.open { display: flex; }
+      .nav-cta { display: none; }
+      .hero-inner { padding: 65px 0 58px; }
+      h1 { font-size: clamp(54px, 16vw, 76px); }
+      .metrics-grid { grid-template-columns: repeat(2,1fr); }
+      .metric { padding: 18px 12px 20px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+      .metric:not(:first-child) { padding-left: 17px; }
+      .metric:nth-child(2) { border-right: 0; }
+      .metric:nth-child(3), .metric:nth-child(4) { border-bottom: 0; }
+      section { padding: 72px 0; }
+      .section-head { display: block; margin-bottom: 34px; }
+      .section-intro { margin-top: 17px; }
+      .about-grid, .foundation-grid { grid-template-columns: 1fr; gap: 30px; }
+      .expertise-grid { grid-template-columns: 1fr 1fr; }
+      .expertise-card { min-height: 205px; padding: 21px 17px; }
+      .expertise-card h3 { font-size: 15px; margin-top: 26px; }
+      .timeline { margin-left: 0; }
+      .timeline:before { left: 7px; }
+      .job { grid-template-columns: 1fr; gap: 8px; padding-left: 30px; padding-bottom: 40px; }
+      .job:before { left: 2px; top: 4px; }
+      .job-date { padding: 0; }
+      .job h3 { font-size: 20px; }
+      .highlights-grid { grid-template-columns: 1fr; }
+      .highlight { min-height: 0; }
+      .contact { padding: 68px 0; }
+      .footer-inner { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Kesler Zhu</h1>
-  <br>
-  <nav>
-    <a href="#">One</a>
-    <a href="#">Two</a>
-    <a href="#">Three</a>
-    <a href="#">Go</a>
-  </nav>
-  <br>
-  <h2>Favorite Foods</h2>
-  <ul>
-      <li>Pancake</li>
-      <li>Orange</li>
-      <li>Strawberry</li>
-      <li>Ice cream</li>
-  </ul>
-  <br>
-  <h2>Achievements</h2>
-  <p>Progress in this course: <progress value=100 max=100></progress></p>
-  <p>Progress in the Specialization capstone: <progress value=20 max=100></progress></p>
-  <p>Progress in life goals <progress value=40 max=100></progress></p>
-  <h2>More About Me</h2>
-  <details>
-      <summary>My Childhood</summary>
-      <p>I was born in Changchun the northeast of China, then moved to Harbin and finished my undergraduate degree there.</p>
-      <p>I then took my first job in Beijing, now I am living in Shanghai.</p>
-  </details>
-  <br>
-  <img width=100 src="http://intro-webdesign.com/images/newlogo.png" alt='Intro to Web Design Logo'>
-  <span>This page was created by Kesler Zhu and Colleen van Lent. To learn more about web design, visit <a href='http://www.intro-webdesign.com'>Intro to Web Design</a></span>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#home" aria-label="Ke Zhu home"><span class="brand-mark">KZ</span><span>KE ZHU</span></a>
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">Profile</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#experience">Experience</a>
+        <a href="#highlights">Highlights</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="KE_Zhu_Resume.pdf" download>Download CV ↗</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-inner">
+        <div>
+          <div class="eyebrow">Systems engineering · Technology · Finance</div>
+          <h1>Ke <span class="surname">Zhu.</span></h1>
+          <p class="hero-lead">Building at the intersection of <strong>enterprise systems, emerging technology, and digital markets.</strong> A systems engineering veteran with 25+ years of experience at IBM and Microsoft — now an independent investor and advisor exploring Generative AI, FX, and digital assets.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#experience">Explore my experience <span>↘</span></a>
+            <a class="btn btn-ghost" href="KE_Zhu_Resume.pdf" download>Download resume <span>↓</span></a>
+          </div>
+        </div>
+        <aside class="hero-aside">
+          <div class="aside-label">Current focus · KZHU.ai</div>
+          <div class="aside-title">Connecting deep engineering experience with the next generation of intelligent systems.</div>
+          <p class="aside-note">Independent Investor &amp; Advisor<br>April 2025 — Present</p>
+        </aside>
+      </div>
+      <div class="metrics">
+        <div class="wrap metrics-grid">
+          <div class="metric"><strong>25+</strong><span>Years in technology</span></div>
+          <div class="metric"><strong>15 yrs</strong><span>At IBM</span></div>
+          <div class="metric"><strong>2</strong><span>Global technology leaders</span></div>
+          <div class="metric"><strong>Zero → One</strong><span>Enterprise product innovation</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="section-kicker">01 / Profile</div><h2>Engineering depth.<br>Forward perspective.</h2></div>
+          <p class="section-intro">A career shaped by solving complex systems problems — and a current focus on where technology and markets are heading next.</p>
+        </div>
+        <div class="about-grid">
+          <p class="about-statement reveal">From enterprise infrastructure to <em>emerging digital ecosystems</em> — turning complex ideas into working systems.</p>
+          <div class="reveal">
+            <p class="about-copy">Over more than 25 years, I have led and contributed to innovation across enterprise software, cloud-native storage, high-performance computing, and blockchain infrastructure at IBM and Microsoft.</p>
+            <p class="about-copy">Today, as an independent investor and advisor at KZHU.ai, I bring that engineering perspective to Generative AI, FX and crypto market analysis, and the development of AI-assisted frameworks for identifying market sentiment and trend reversals.</p>
+            <div class="about-tags">
+              <span class="tag">Systems Engineering</span><span class="tag">Cloud-Native Storage</span><span class="tag">High-Performance Computing</span><span class="tag">Blockchain</span><span class="tag">Generative AI</span><span class="tag">FX &amp; Digital Assets</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="expertise" id="expertise">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="section-kicker">02 / Core expertise</div><h2>Four areas of focus.</h2></div>
+          <p class="section-intro">A multidisciplinary foundation spanning modern AI workflows, enterprise infrastructure, financial markets, and foundational systems engineering.</p>
+        </div>
+        <div class="expertise-grid reveal">
+          <article class="expertise-card"><div class="expertise-num">01 — INTELLIGENCE</div><h3>AI &amp; Automation</h3><p>AI Agents (n8n, CrewAI), Vibe Coding, LLM Orchestration, and Trend Prediction.</p></article>
+          <article class="expertise-card"><div class="expertise-num">02 — INFRASTRUCTURE</div><h3>Cloud &amp; Infrastructure</h3><p>Kubernetes (Spectrum Fusion), Cloud-Native Storage, Docker, and OpenCL.</p></article>
+          <article class="expertise-card"><div class="expertise-num">03 — MARKETS</div><h3>FinTech</h3><p>FX Swing Trading, Crypto Market Analysis, and Blockchain Network Design (ACT 3.0).</p></article>
+          <article class="expertise-card"><div class="expertise-num">04 — FOUNDATIONS</div><h3>Legacy Systems</h3><p>Spectrum Scale (GPFS), Enterprise Storage (V7000), Symbian OS, C++, and Python.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience" id="experience">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="section-kicker">03 / Professional experience</div><h2>A career in building<br>what comes next.</h2></div>
+          <p class="section-intro">From global enterprise engineering to independent advisory — a track record of technical leadership and product innovation.</p>
+        </div>
+        <div class="timeline">
+          <article class="job reveal">
+            <div class="job-date">APR 2025 — PRESENT</div>
+            <div class="job-content">
+              <div class="job-top"><div><h3>KZHU.ai</h3><div class="job-role">Investor &amp; Advisor</div></div><span class="job-badge">CURRENT</span></div>
+              <ul>
+                <li><strong>Strategic Advisory:</strong> Consulting for partners on aligning enterprise Cloud/AI skills with emerging academic and market trends.</li>
+                <li><strong>Algorithmic Analysis:</strong> Developing proprietary frameworks for FX and Crypto trading, utilizing AI agents for market sentiment and trend reversal identification.</li>
+                <li><strong>Tech-Finance Integration:</strong> Bridging 25 years of software methodology with long-term position trading and macro-economic strategy.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="job reveal">
+            <div class="job-date">FEB 2010 — MAR 2025</div>
+            <div class="job-content">
+              <div class="job-top"><div><h3>IBM</h3><div class="job-role">Advisory Software Engineer</div></div><span class="job-badge">15 YEARS</span></div>
+              <ul>
+                <li><strong>Cloud-Native Storage Leadership:</strong> Led development for Spectrum Fusion (Kubernetes) and spearheaded the Machine City initiative, a pioneer in Cloud-Native storage.</li>
+                <li><strong>Product Evolution:</strong> Key contributor to the core architecture of Spectrum Scale (GPFS) v4.2–5.0 and the Storwize V7000 Unified series.</li>
+                <li>Designed a cluster system behavior prediction engine (2019) using early machine learning paradigms.</li>
+                <li>Developed Analytic Cloud Test 3.0, integrating Bitcoin and Blockchain protocols into enterprise testing environments (2016).</li>
+                <li>Optimized filesystems for high-demand image/video encoding and medical imaging (PACS).</li>
+                <li>Built the Universal Storage Bootcamp iOS app and implemented heterogeneous computing via OpenCL for Big Data.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="job reveal">
+            <div class="job-date">NOV 2008 — JAN 2010</div>
+            <div class="job-content">
+              <div class="job-top"><div><h3>AutoNavi</h3><div class="job-role">Technical Consultant</div></div></div>
+              <ul><li>Architected the software testing infrastructure for the Global Geocoding Information System (partnered with General Motors) and the Next-Generation Manufacturing System.</li></ul>
+            </div>
+          </article>
+          <article class="job reveal">
+            <div class="job-date">DEC 2004 — FEB 2007</div>
+            <div class="job-content">
+              <div class="job-top"><div><h3>Microsoft</h3><div class="job-role">Software Design Engineer in Test (SDET)</div></div></div>
+              <ul><li>Engineered test automation and web crawler frameworks for adCenter (Bing Ads) and developed the original MSDN Forums 1.0.</li></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="highlights" id="highlights">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="section-kicker">04 / Selected innovation</div><h2>Ideas made tangible.</h2></div>
+          <p class="section-intro">Selected examples of work across predictive systems, blockchain integration, advanced computing, and enterprise platforms.</p>
+        </div>
+        <div class="highlights-grid">
+          <article class="highlight reveal"><div class="year">2019 · MACHINE LEARNING</div><h3>Cluster behavior prediction engine</h3><p>Designed an engine to predict cluster system behavior, applying early machine learning paradigms to enterprise infrastructure.</p></article>
+          <article class="highlight reveal"><div class="year">2016 · BLOCKCHAIN</div><h3>Analytic Cloud Test 3.0</h3><p>Developed an enterprise testing environment integrating Bitcoin and blockchain protocols.</p></article>
+          <article class="highlight reveal"><div class="year">CLOUD-NATIVE · KUBERNETES</div><h3>Spectrum Fusion &amp; Machine City</h3><p>Led development for Spectrum Fusion and spearheaded the Machine City initiative in cloud-native storage.</p></article>
+          <article class="highlight reveal"><div class="year">HPC · OPENCL</div><h3>Heterogeneous computing for Big Data</h3><p>Implemented heterogeneous computing via OpenCL and optimized filesystems for demanding imaging and encoding workloads.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="foundations" id="education">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="section-kicker">05 / Foundations</div><h2>Early career &amp; education.</h2></div>
+          <p class="section-intro">A foundation in software engineering, product experimentation, and information systems.</p>
+        </div>
+        <div class="foundation-grid">
+          <div class="reveal">
+            <div class="foundation-list">
+              <div class="foundation-item"><div class="mark">01</div><div><strong>Symbian PLC</strong><span>Test design for Symbian OS (acquired by Nokia).</span></div></div>
+              <div class="foundation-item"><div class="mark">02</div><div><strong>Kesler &amp; Company</strong><span>Founder of “Tech Meets Art” startup — incubated consumer electronics and fashionable tech gadgets.</span></div></div>
+              <div class="foundation-item"><div class="mark">03</div><div><strong>Chinasoft Resources</strong><span>ASP.NET / SQL Server specialist.</span></div></div>
+            </div>
+          </div>
+          <div class="education-card reveal">
+            <div class="label">Academic background</div>
+            <h3>Harbin Institute of Technology</h3>
+            <p>Bachelor of Management Information System<br>July 2000 — July 2004</p>
+            <div class="cert"><div class="label">Continuing education</div><h3>Coursera</h3><p>180 course certificates issued by renowned universities worldwide, from the Coursera platform.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap contact-inner">
+        <div>
+          <div class="section-kicker">06 / Get in touch</div>
+          <h2>Let's connect ideas<br>with opportunity.</h2>
+          <p>For advisory, technology, and investment-related conversations.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="contact-link" href="mailto:mail@kzhu.ai"><span>↗</span> mail@kzhu.ai</a>
+          <a class="contact-link" href="tel:+8618502114774"><span>↗</span> +86 185 0211 4774</a>
+          <a class="contact-link" href="KE_Zhu_Resume.pdf" download><span>↓</span> Download full resume (PDF)</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner"><span>© <span id="year"></span> <strong>Ke Zhu</strong>. All rights reserved.</span><span>Systems engineering · Technology · Finance</span></div>
+  </footer>
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const links = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
