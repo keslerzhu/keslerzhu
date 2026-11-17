@@ -1,0 +1,11 @@
+I use [ ] to denote components, use -> to denote data flow.
+
+The connections are blow, you draw connections ONLY according to this:
+
+1. [OpenStreetMap], [PostgreSQL/PostGIS] -> [Martin], [Nominatim], [Valhalla] -> [MapLibre]
+2. [Nominatim], [Valhalla] -> [MCP Server]
+3. [MapLibre] -> [Browser]
+4. [MCP Server] -> [AI Agent]
+5. [IoT] -> [Kafka] -> [Message Processor] -> [Web Socket], [PostgreSQL], [GeoParquet]
+6. [Web Socket] -> [MapLibre]
+7. [PostgreSQL/PostGIS] -> [Spark/Sedona] -> [Data Lakehouse] -> [MinIO/S3] ->[GeoParquet]
