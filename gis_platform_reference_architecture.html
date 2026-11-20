@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference Architecture: An Open Source GIS Platform with Data Lakehouse and Governance</title>
+<style>
+:root{color-scheme:dark;--bg:#091321;--text:#e9f0fa;--muted:#9aadc5;--op:#35d39a;--op2:#55c8ff;--ana:#b69cff;--amber:#f5bd58;--mcp:#f4a7d6;--gov:#77d8e9}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#1b3553 0,var(--bg) 58%);color:var(--text);font:14px/1.45 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+header{max-width:1500px;margin:auto;padding:28px clamp(16px,4vw,52px) 18px}.eyebrow{color:#77d8e9;text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:800}h1{font-size:clamp(24px,2.8vw,37px);line-height:1.12;letter-spacing:-.035em;margin:7px 0;max-width:1100px}.subtitle{max-width:1000px;color:var(--muted);margin:0}
+.toolbar{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px;align-items:center}button,.pill{border:1px solid #354b65;border-radius:9px;background:#14263b;color:var(--text);padding:8px 12px;font:inherit}button{cursor:pointer}button:hover,button.active{border-color:#70d8e7;color:#8be8f2}.pill{font-size:11px;color:var(--muted)}
+main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{border:1px solid #2a405a;border-radius:16px;overflow:hidden;background:#0e1a2a;box-shadow:0 22px 70px #0006}.frame-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:13px 17px;background:#122137;border-bottom:1px solid #2a405a}.frame-head strong{font-size:13px}.legend{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:11px}.legend span{display:flex;align-items:center;gap:6px}.dot{width:17px;height:3px;border-radius:4px;display:inline-block}.scroll{overflow-x:auto}svg{display:block;width:100%;min-width:900px;height:auto}
+.zone{stroke-width:1.2;rx:15}.zone.front{fill:#111f31;stroke:#2b425e}.zone.oper{fill:#10271f;stroke:#24664d}.zone.anal{fill:#1c1930;stroke:#594b87}.zone.gov{fill:#0f2328;stroke:#2d6672}.zone-title{font-size:15px;font-weight:800;letter-spacing:.08em;fill:#dce9f8}.zone-sub{font-size:10.5px;fill:#a8b8ce}
+.sep{stroke:#4b6a8c;stroke-width:1.4;stroke-dasharray:9 7;opacity:.85}
+.col{fill:#ffffff07;stroke:#3d3768;stroke-width:1;stroke-dasharray:3 4;rx:10}.col.lake{fill:#f5bd580d;stroke:#8a6a2b}
+.node{cursor:default}.node rect{fill:#172b42;stroke:#506b88;stroke-width:1.3;rx:10}.node .title{font-size:13px;font-weight:750;fill:#f0f5fc}.node .sub{font-size:10.5px;fill:#aabbd0}.node.op rect{stroke:#3e9874}.node.ana rect{stroke:#8673c1}.node.mcp rect{stroke:#b777a3}.node.source rect{stroke:#6c91b4}.node.gov rect{stroke:#4fa8b8}.node.future rect{stroke:#c39442;stroke-dasharray:5 4}.node.future .title{fill:#ffdda0}
+.edge{fill:none;stroke-width:2.3;opacity:.88}.edge.op{stroke:var(--op)}.edge.map{stroke:var(--op2)}.edge.ana{stroke:var(--ana)}.edge.mcp{stroke:var(--mcp)}.edge.gov{stroke:var(--gov)}.edge.future{stroke:var(--amber);stroke-dasharray:7 6}.edge-label{font-size:10px;fill:#c0cde0;paint-order:stroke;stroke:#101c2c;stroke-width:4px;stroke-linejoin:round}.particle{pointer-events:none;filter:drop-shadow(0 0 4px currentColor)}.particle.op{fill:var(--op);color:var(--op)}.particle.map{fill:var(--op2);color:var(--op2)}.particle.ana{fill:var(--ana);color:var(--ana)}.particle.mcp{fill:var(--mcp);color:var(--mcp)}.particle.gov{fill:var(--gov);color:var(--gov)}.particle.future{fill:var(--amber);color:var(--amber)}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}.card{border:1px solid #2a405a;background:#101d2e;border-radius:12px;padding:15px}.card h2{font-size:15px;margin:0 0 7px}.card p{color:var(--muted);font-size:12px;margin:0}.tag{display:inline-block;font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;margin-left:6px;vertical-align:1px}.tag.live{color:#9df0c9;background:#123b2c}.tag.build{color:#ffdda0;background:#403015}.tag.ui{color:#bcd6f5;background:#1b3250}.tag.gov{color:#aaeaf4;background:#12363f}.notes{margin-top:13px;color:var(--muted);font-size:12px}.key{margin-top:13px;border:1px solid #2a405a;border-radius:12px;padding:14px 16px;background:#101d2e}.key h3{margin:0 0 6px;font-size:14px}.key ul,.key ol{color:var(--muted);font-size:12px;margin:8px 0 0;padding-left:22px}.key li{margin:4px 0}footer{font-size:11px;color:#71849d;padding:20px 4px 0}@media(max-width:760px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+ <div class="eyebrow">Open source GIS · Data lakehouse · Data governance</div>
+ <h1>Reference Architecture: An Open Source GIS Platform with Data Lakehouse and Governance</h1>
+ <p class="subtitle">Four layers from top to bottom: interactive, business logic, data lakehouse and data governance. The diagram draws only the ten connection rules supplied.</p>
+ <div class="toolbar">
+  <button id="play" class="active">Ⅱ Pause animation</button>
+  <button id="mapToggle" class="active">✓ Map serving</button>
+  <button id="opToggle" class="active">✓ Live streaming</button>
+  <button id="mcpToggle" class="active">✓ MCP flow</button>
+  <button id="anaToggle" class="active">✓ Lakehouse path</button>
+  <button id="govToggle" class="active">✓ Governance flow</button>
+  <span class="pill">Animated particles follow arrow direction</span><span class="pill">Dashed amber = lakehouse components</span>
+ </div>
+</header>
+<main>
+<section class="frame">
+ <div class="frame-head"><strong>Exact component connections · No inferred links</strong>
+  <div class="legend">
+   <span><i class="dot" style="background:var(--op2)"></i> Map serving</span>
+   <span><i class="dot" style="background:var(--op)"></i> Live streaming</span>
+   <span><i class="dot" style="background:var(--mcp)"></i> MCP</span>
+   <span><i class="dot" style="background:var(--ana)"></i> Lakehouse &amp; ingestion</span>
+   <span><i class="dot" style="background:var(--amber)"></i> Lakehouse tables</span>
+   <span><i class="dot" style="background:var(--gov)"></i> Metadata</span>
+  </div>
+ </div>
+ <div class="scroll">
+ <svg viewBox="0 0 1400 1320" role="img" aria-label="Open source GIS platform reference architecture in four layers: interactive, business logic, data lakehouse and data governance">
+ <defs>
+  <marker id="arrOp" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#35d39a" stroke-width="1.2"/></marker>
+  <marker id="arrMap" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#55c8ff" stroke-width="1.2"/></marker>
+  <marker id="arrAna" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#b69cff" stroke-width="1.2"/></marker>
+  <marker id="arrMcp" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#f4a7d6" stroke-width="1.2"/></marker>
+  <marker id="arrGov" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#77d8e9" stroke-width="1.2"/></marker>
+  <marker id="arrFuture" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#f5bd58" stroke-width="1.2"/></marker>
+ </defs>
+
+ <!-- LAYERS -->
+ <rect class="zone front" x="28" y="25" width="1344" height="190"/>
+ <text class="zone-title" x="52" y="55">INTERACTIVE</text><text class="zone-sub" x="52" y="75">Where people, agents and devices connect</text>
+ <rect class="zone oper" x="28" y="255" width="1344" height="285"/>
+ <text class="zone-title" x="52" y="285" fill="#8cf0c2">BUSINESS LOGIC</text><text class="zone-sub" x="52" y="303">Map, geocoding, routing and event services</text>
+ <rect class="zone anal" x="28" y="580" width="1344" height="510"/>
+ <text class="zone-title" x="52" y="610" fill="#d0bdff">DATA LAKEHOUSE</text><text class="zone-sub" x="52" y="628">Operational and analytical spatial storage</text>
+ <rect class="zone gov" x="28" y="1130" width="1344" height="160"/>
+ <text class="zone-title" x="52" y="1160" fill="#9be7f2">DATA GOVERNANCE</text><text class="zone-sub" x="52" y="1178">Metadata and content extraction</text>
+
+ <!-- LINES BETWEEN LAYERS -->
+ <line class="sep" x1="28" y1="235" x2="1372" y2="235"/>
+ <line class="sep" x1="28" y1="560" x2="1372" y2="560"/>
+ <line class="sep" x1="28" y1="1110" x2="1372" y2="1110"/>
+
+ <!-- LAKEHOUSE COLUMNS -->
+ <rect class="col" x="240" y="645" width="180" height="420"/>
+ <rect class="col" x="500" y="645" width="240" height="420"/>
+ <rect class="col lake" x="825" y="645" width="210" height="420"/>
+ <rect class="col" x="1200" y="645" width="162" height="420"/>
+
+ <g id="edges">
+  <!-- 1. OpenStreetMap, PostgreSQL/PostGIS -> Martin, Nominatim, Valhalla -> MapLibre -->
+  <path id="e-osm-nom" class="edge map" d="M330 650 V475 H270 V440" marker-end="url(#arrMap)"/>
+  <path id="e-osm-val" class="edge map" d="M330 650 V475 H460 V440" marker-end="url(#arrMap)"/>
+  <path id="e-osm-martin" class="edge map" d="M330 650 V475 H650 V440" marker-end="url(#arrMap)"/>
+  <path id="e-db-nom" class="edge map" d="M600 760 V475 H270 V440" marker-end="url(#arrMap)"/>
+  <path id="e-db-val" class="edge map" d="M600 760 V475 H460 V440" marker-end="url(#arrMap)"/>
+  <path id="e-db-martin" class="edge map" d="M600 760 V475 H650 V440" marker-end="url(#arrMap)"/>
+  <path id="e-nom-ml" class="edge map" d="M300 365 V325 H650 V185" marker-end="url(#arrMap)"/>
+  <path id="e-val-ml" class="edge map" d="M490 365 V325 H650 V185" marker-end="url(#arrMap)"/>
+  <path id="e-martin-ml" class="edge map" d="M650 365 V185" marker-end="url(#arrMap)"/>
+  <!-- 2. Nominatim, Valhalla -> MCP Server -->
+  <path id="e-nom-mcp" class="edge mcp" d="M240 365 V345 H400 V185" marker-end="url(#arrMcp)"/>
+  <path id="e-val-mcp" class="edge mcp" d="M430 365 V345 H400 V185" marker-end="url(#arrMcp)"/>
+  <!-- 3. MapLibre -> Browser (User) -->
+  <path id="e-ml-user" class="edge map" d="M735 148 H795" marker-end="url(#arrMap)"/>
+  <!-- 4. MCP Server -> AI Agent -->
+  <path id="e-mcp-agent" class="edge mcp" d="M315 148 H255" marker-end="url(#arrMcp)"/>
+  <!-- 5. IoT -> Kafka -> Message Processor -> Web Socket, PostgreSQL/PostGIS, GeoParquet -->
+  <path id="e-iot-kafka" class="edge op" d="M1220 185 V365" marker-end="url(#arrOp)"/>
+  <path id="e-kafka-mp" class="edge op" d="M1150 402 H1100" marker-end="url(#arrOp)"/>
+  <path id="e-mp-ws" class="edge op" d="M960 402 H910" marker-end="url(#arrOp)"/>
+  <path id="e-mp-db" class="edge op" d="M1000 440 V500 H680 V760" marker-end="url(#arrOp)"/>
+  <path id="e-mp-gp" class="edge op" d="M1080 440 V1015 H1015" marker-end="url(#arrOp)"/>
+  <!-- 6. Web Socket -> MapLibre -->
+  <path id="e-ws-ml" class="edge op" d="M840 365 V225 H700 V185" marker-end="url(#arrOp)"/>
+  <!-- 7. PostgreSQL/PostGIS -> Spark/Sedona -> Iceberg -> GeoParquet -->
+  <path id="e-db-spark" class="edge ana" d="M720 795 H845" marker-end="url(#arrAna)"/>
+  <path id="e-spark-ice" class="edge future" d="M930 830 V870" marker-end="url(#arrFuture)"/>
+  <path id="e-ice-gp" class="edge future" d="M930 940 V980" marker-end="url(#arrFuture)"/>
+  <!-- 8. OpenStreetMap -> osm2pgsql -> PostgreSQL/PostGIS -> OpenMetadata -->
+  <path id="e-osm-o2p" class="edge ana" d="M330 720 V760" marker-end="url(#arrAna)"/>
+  <path id="e-o2p-db" class="edge ana" d="M405 795 H520" marker-end="url(#arrAna)"/>
+  <path id="e-db-om" class="edge gov" d="M620 830 V1205" marker-end="url(#arrGov)"/>
+  <!-- 9. Iceberg, Kafka -> OpenMetadata -->
+  <path id="e-ice-om" class="edge gov" d="M845 905 H780 V1205" marker-end="url(#arrGov)"/>
+  <path id="e-kafka-om" class="edge gov" d="M1170 440 V1075 H840 V1205" marker-end="url(#arrGov)"/>
+  <!-- 10. Microsoft Office -> Apache POI & Tika -> OpenMetadata -->
+  <path id="e-office-poi" class="edge gov" d="M1285 940 V1205" marker-end="url(#arrGov)"/>
+  <path id="e-poi-om" class="edge gov" d="M1130 1240 H880" marker-end="url(#arrGov)"/>
+
+  <text class="edge-label" x="478" y="467">map &amp; spatial data</text>
+  <text class="edge-label" x="410" y="270">geocoding / routing tools</text>
+  <text class="edge-label" x="850" y="285">live positions</text>
+  <text class="edge-label" x="1228" y="290">GPS / vehicle events</text>
+  <text class="edge-label" x="1293" y="1100">documents</text>
+  <text class="edge-label" x="960" y="1232">extracted metadata</text>
+ </g>
+
+ <!-- 1. INTERACTIVE -->
+ <g class="node source" id="n-user"><rect x="795" y="110" width="170" height="75"/><text class="title" x="880" y="141" text-anchor="middle">User</text><text class="sub" x="880" y="163" text-anchor="middle">Browser</text></g>
+ <g class="node" id="n-maplibre"><rect x="565" y="110" width="170" height="75"/><text class="title" x="650" y="141" text-anchor="middle">MapLibre</text><text class="sub" x="650" y="163" text-anchor="middle">web map client</text></g>
+ <g class="node mcp" id="n-agent"><rect x="85" y="110" width="170" height="75"/><text class="title" x="170" y="141" text-anchor="middle">AI Agent</text><text class="sub" x="170" y="163" text-anchor="middle">tool-calling client</text></g>
+ <g class="node mcp" id="n-mcp"><rect x="315" y="110" width="170" height="75"/><text class="title" x="400" y="141" text-anchor="middle">MCP Server</text><text class="sub" x="400" y="163" text-anchor="middle">GIS tool interface</text></g>
+ <g class="node op" id="n-iot"><rect x="1135" y="110" width="170" height="75"/><text class="title" x="1220" y="141" text-anchor="middle">IoT</text><text class="sub" x="1220" y="163" text-anchor="middle">devices and sensors</text></g>
+
+ <!-- 2. BUSINESS LOGIC -->
+ <g class="node op" id="n-nominatim"><rect x="200" y="365" width="140" height="75"/><text class="title" x="270" y="396" text-anchor="middle">Nominatim</text><text class="sub" x="270" y="418" text-anchor="middle">geocoding</text></g>
+ <g class="node op" id="n-valhalla"><rect x="390" y="365" width="140" height="75"/><text class="title" x="460" y="396" text-anchor="middle">Valhalla</text><text class="sub" x="460" y="418" text-anchor="middle">routing engine</text></g>
+ <g class="node op" id="n-martin"><rect x="580" y="365" width="140" height="75"/><text class="title" x="650" y="396" text-anchor="middle">Martin</text><text class="sub" x="650" y="418" text-anchor="middle">vector tile server</text></g>
+ <g class="node op" id="n-ws"><rect x="770" y="365" width="140" height="75"/><text class="title" x="840" y="396" text-anchor="middle">Web Socket</text><text class="sub" x="840" y="418" text-anchor="middle">live updates</text></g>
+ <g class="node op" id="n-mp"><rect x="960" y="365" width="140" height="75"/><text class="title" x="1030" y="396" text-anchor="middle">Message Processor</text><text class="sub" x="1030" y="418" text-anchor="middle">stream consumer</text></g>
+ <g class="node op" id="n-kafka"><rect x="1150" y="365" width="140" height="75"/><text class="title" x="1220" y="396" text-anchor="middle">Kafka</text><text class="sub" x="1220" y="418" text-anchor="middle">event streaming</text></g>
+
+ <!-- 3. DATA LAKEHOUSE -->
+ <g class="node source" id="n-osm"><rect x="255" y="650" width="150" height="70"/><text class="title" x="330" y="680" text-anchor="middle">OpenStreetMap</text><text class="sub" x="330" y="701" text-anchor="middle">map data source</text></g>
+ <g class="node ana" id="n-o2p"><rect x="255" y="760" width="150" height="70"/><text class="title" x="330" y="790" text-anchor="middle">osm2pgsql</text><text class="sub" x="330" y="811" text-anchor="middle">OSM importer</text></g>
+ <g class="node op" id="n-db"><rect x="520" y="760" width="200" height="70"/><text class="title" x="620" y="790" text-anchor="middle">PostgreSQL / PostGIS</text><text class="sub" x="620" y="811" text-anchor="middle">spatial database</text></g>
+ <g class="node future" id="n-spark"><rect x="845" y="760" width="170" height="70"/><text class="title" x="930" y="790" text-anchor="middle">Spark / Sedona</text><text class="sub" x="930" y="811" text-anchor="middle">spatial processing</text></g>
+ <g class="node future" id="n-iceberg"><rect x="845" y="870" width="170" height="70"/><text class="title" x="930" y="900" text-anchor="middle">Iceberg</text><text class="sub" x="930" y="921" text-anchor="middle">table format</text></g>
+ <g class="node future" id="n-gp"><rect x="845" y="980" width="170" height="70"/><text class="title" x="930" y="1010" text-anchor="middle">GeoParquet</text><text class="sub" x="930" y="1031" text-anchor="middle">columnar geodata</text></g>
+ <g class="node source" id="n-office"><rect x="1210" y="870" width="150" height="70"/><text class="title" x="1285" y="900" text-anchor="middle">Microsoft Office</text><text class="sub" x="1285" y="921" text-anchor="middle">documents</text></g>
+
+ <!-- 4. DATA GOVERNANCE -->
+ <g class="node gov" id="n-om"><rect x="560" y="1205" width="320" height="70"/><text class="title" x="720" y="1235" text-anchor="middle">OpenMetadata</text><text class="sub" x="720" y="1256" text-anchor="middle">metadata catalog</text></g>
+ <g class="node gov" id="n-poi"><rect x="1130" y="1205" width="200" height="70"/><text class="title" x="1230" y="1235" text-anchor="middle">Apache POI &amp; Tika</text><text class="sub" x="1230" y="1256" text-anchor="middle">content extraction</text></g>
+
+ <g id="particles"></g>
+ </svg>
+ </div>
+</section>
+
+<section class="cards">
+ <article class="card"><h2 style="color:#bcd6f5">Interactive <span class="tag ui">LAYER 1</span></h2><p>User, MapLibre, AI Agent, MCP Server and IoT. People reach the map through the browser; the AI Agent reaches GIS tools through the MCP Server; IoT devices originate the live event stream.</p></article>
+ <article class="card"><h2 style="color:var(--op)">Business logic <span class="tag live">LAYER 2</span></h2><p>Martin, Nominatim and Valhalla serve tiles, geocoding and routing. Kafka, the Message Processor and Web Socket carry live events to the map and to storage.</p></article>
+ <article class="card"><h2 style="color:var(--ana)">Data lakehouse <span class="tag build">LAYER 3</span></h2><p>Four columns: OpenStreetMap with osm2pgsql; PostgreSQL/PostGIS; Spark/Sedona, Iceberg and GeoParquet; and Microsoft Office. The Spark/Sedona, Iceberg and GeoParquet column forms the lakehouse path.</p></article>
+ <article class="card"><h2 style="color:var(--gov)">Data governance <span class="tag gov">LAYER 4</span></h2><p>OpenMetadata collects metadata from PostgreSQL/PostGIS, Iceberg and Kafka. Apache POI &amp; Tika extract content from Microsoft Office documents and pass it to OpenMetadata.</p></article>
+</section>
+
+<section class="key"><h3>Connections drawn</h3><ol>
+ <li>OpenStreetMap, PostgreSQL/PostGIS → Martin, Nominatim, Valhalla → MapLibre</li>
+ <li>Nominatim, Valhalla → MCP Server</li>
+ <li>MapLibre → Browser</li>
+ <li>MCP Server → AI Agent</li>
+ <li>IoT → Kafka → Message Processor → Web Socket, PostgreSQL/PostGIS, GeoParquet</li>
+ <li>Web Socket → MapLibre</li>
+ <li>PostgreSQL/PostGIS → Spark/Sedona → Iceberg → GeoParquet</li>
+ <li>OpenStreetMap → osm2pgsql → PostgreSQL/PostGIS → OpenMetadata</li>
+ <li>Iceberg, Kafka → OpenMetadata</li>
+ <li>Microsoft Office → Apache POI &amp; Tika → OpenMetadata</li>
+</ol></section>
+<p class="notes">The Browser in rule 3 is drawn as the User node. PostgreSQL/PostGIS and GeoParquet are each a single component; arrows to them from the Message Processor and from the other sources are drawn to that one box. Where several sources feed several targets, the lines share a rail so the flow stays legible.</p>
+<footer>Reference Architecture · Open source GIS platform · Self-contained HTML / SVG / CSS / JavaScript · No external libraries</footer>
+</main>
+<script>
+(()=>{
+ const NS="http://www.w3.org/2000/svg",layer=document.getElementById("particles");
+ const paths=[
+  ["e-osm-nom","map"],["e-osm-val","map"],["e-osm-martin","map"],["e-db-nom","map"],["e-db-val","map"],["e-db-martin","map"],
+  ["e-nom-ml","map"],["e-val-ml","map"],["e-martin-ml","map"],["e-ml-user","map"],
+  ["e-nom-mcp","mcp"],["e-val-mcp","mcp"],["e-mcp-agent","mcp"],
+  ["e-iot-kafka","op"],["e-kafka-mp","op"],["e-mp-ws","op"],["e-mp-db","op"],["e-mp-gp","op"],["e-ws-ml","op"],
+  ["e-db-spark","ana"],["e-spark-ice","future"],["e-ice-gp","future"],["e-osm-o2p","ana"],["e-o2p-db","ana"],
+  ["e-db-om","gov"],["e-ice-om","gov"],["e-kafka-om","gov"],["e-office-poi","gov"],["e-poi-om","gov"]
+ ];
+ const group={map:"map",op:"op",mcp:"mcp",ana:"ana",future:"ana",gov:"gov"};
+ const state={map:true,op:true,mcp:true,ana:true,gov:true},items=[];
+ paths.forEach(([id,type])=>{const p=document.getElementById(id),len=p.getTotalLength(),n=Math.max(1,Math.round(len/260));for(let i=0;i<n;i++){const c=document.createElementNS(NS,"circle");c.setAttribute("r","4");c.setAttribute("class","particle "+type);layer.appendChild(c);items.push({el:c,path:p,len,type,g:group[type],offset:i/n});}});
+ const reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+ let run=!reduce,last=0,t=0;
+ const SPEED=.075;
+ function place(x){const d=((t*SPEED+x.offset*x.len)%x.len),pt=x.path.getPointAtLength(d);x.el.setAttribute("cx",pt.x);x.el.setAttribute("cy",pt.y);}
+ function tick(now){if(!last)last=now;const dt=Math.min(50,now-last);last=now;if(run)t+=dt;items.forEach(x=>{x.el.style.display=state[x.g]?"":"none";if(state[x.g])place(x);});requestAnimationFrame(tick);}
+ requestAnimationFrame(tick);
+ const play=document.getElementById("play");
+ function setPlay(){play.textContent=run?"Ⅱ Pause animation":"▶ Resume animation";play.classList.toggle("active",run);}
+ setPlay();play.onclick=()=>{run=!run;setPlay();};
+ function bind(id,key,label){const b=document.getElementById(id);b.onclick=()=>{state[key]=!state[key];b.textContent=(state[key]?"✓ ":"○ ")+label;b.classList.toggle("active",state[key]);};}
+ bind("mapToggle","map","Map serving");bind("opToggle","op","Live streaming");bind("mcpToggle","mcp","MCP flow");bind("anaToggle","ana","Lakehouse path");bind("govToggle","gov","Governance flow");
+})();
+</script>
+</body>
+</html>
