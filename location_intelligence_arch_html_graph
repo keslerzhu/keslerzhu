@@ -6,12 +6,11 @@ I use [ ] to denote components, use -> to denote data flow.
 There are 4 layers, from top to bottom they are:
 1. Interactive: contains [WebBrowser], [MapLibre], [AI Agent], [MCP Server], [IoT], [QGIS]
 2. Business logics: contains [Martin], [Nominatim], [Valhalla], [Kafka], [Message Processor], [Web Socket], [GeoServer]
-3. Data Lakehouse: contains 4 columns
-      Open source data: contains [OpenStreetMap], [osm2pgsql]
+3. Data Lakehouse: contains 3 columns
       Structured data: contains [PostgreSQL/PostGIS]
-      Analytical engine: contains [Spark/Sedona], [Iceberg], [GeoParquet]
-      FS/Object: contains [Microsoft Office]
-4. Data Governance: contains [OpenMetadata], [Apache POI & Tika]
+      Analytical engine: contains [Spark/Sedona], [Iceberg]
+      Filesystem / Object storage: contains [Images], [Videos], [GeoParquet], [Microsoft Office], [OpenStreetMap], [osm2pgsql]
+4. Data Governance: contains [OpenMetadata], [Apache POI & Tika], [Apache Ranger], [Apache Gravitino]
 Draw a line between layers.
 
 The connections are blow, you draw connections ONLY according to this:
