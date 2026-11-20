@@ -1,4 +1,18 @@
+This the HTML page you generated a few days ago.
+https://keslerzhu.github.io/keslerzhu/location_intelligence_architecture.html
+I want to use the same style and draw the GIS-platform architecutre as an html page titled "Reference Architecture: An Open Source GIS Platform with Data Lakehouse and Governance"
+
 I use [ ] to denote components, use -> to denote data flow.
+There are 4 layers, from top to bottom they are:
+1. Interactive: contains [User], [MapLibre], [AI Agent], [MCP Server], [IoT]
+2. Business logics: contains [Martin], [Nominatim], [Valhalla], [Kafka], [Message Processor], [Web Socket]
+3. Data Lakehouse: contains 4 columns
+      column 1: contains [OpenStreetMap], [osm2pgsql]
+      column 2: contains [PostgreSQL/PostGIS]
+      column 3: contains [Spark/Sedona], [Iceberg], [GeoParquet]
+      column 4: contains [Microsoft Office]
+4. Data Governance: contains [OpenMetadata], [Apache POI & Tika]
+Draw a line between layers.
 
 The connections are blow, you draw connections ONLY according to this:
 
@@ -6,6 +20,9 @@ The connections are blow, you draw connections ONLY according to this:
 2. [Nominatim], [Valhalla] -> [MCP Server]
 3. [MapLibre] -> [Browser]
 4. [MCP Server] -> [AI Agent]
-5. [IoT] -> [Kafka] -> [Message Processor] -> [Web Socket], [PostgreSQL], [GeoParquet]
+5. [IoT] -> [Kafka] -> [Message Processor] -> [Web Socket], [PostgreSQL/PostGIS], [GeoParquet]
 6. [Web Socket] -> [MapLibre]
-7. [PostgreSQL/PostGIS] -> [Spark/Sedona] -> [Data Lakehouse] -> [MinIO/S3] ->[GeoParquet]
+7. [PostgreSQL/PostGIS] -> [Spark/Sedona] -> [Iceberg] ->[GeoParquet]
+8. [OpenStreetMap] -> [osm2pgsql] -> [PostgreSQL/PostGIS] -> [OpenMetadata]
+9. [Iceberg], [Kafka] -> [OpenMetadata]
+10. [Microsoft Office] -> [Apache POI & Tika] -> [OpenMetadata]
