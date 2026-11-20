@@ -1,16 +1,16 @@
 This the HTML page you generated a few days ago.
-https://keslerzhu.github.io/keslerzhu/location_intelligence_architecture.html
+https://keslerzhu.github.io/keslerzhu/gis_platform_reference_architecture.html
 I want to use the same style and draw the GIS-platform architecutre as an html page titled "Reference Architecture: An Open Source GIS Platform with Data Lakehouse and Governance"
 
 I use [ ] to denote components, use -> to denote data flow.
 There are 4 layers, from top to bottom they are:
-1. Interactive: contains [User], [MapLibre], [AI Agent], [MCP Server], [IoT]
-2. Business logics: contains [Martin], [Nominatim], [Valhalla], [Kafka], [Message Processor], [Web Socket]
+1. Interactive: contains [WebBrowser], [MapLibre], [AI Agent], [MCP Server], [IoT], [QGIS]
+2. Business logics: contains [Martin], [Nominatim], [Valhalla], [Kafka], [Message Processor], [Web Socket], [GeoServer]
 3. Data Lakehouse: contains 4 columns
-      column 1: contains [OpenStreetMap], [osm2pgsql]
-      column 2: contains [PostgreSQL/PostGIS]
-      column 3: contains [Spark/Sedona], [Iceberg], [GeoParquet]
-      column 4: contains [Microsoft Office]
+      Open source data: contains [OpenStreetMap], [osm2pgsql]
+      Structured data: contains [PostgreSQL/PostGIS]
+      Analytical engine: contains [Spark/Sedona], [Iceberg], [GeoParquet]
+      FS/Object: contains [Microsoft Office]
 4. Data Governance: contains [OpenMetadata], [Apache POI & Tika]
 Draw a line between layers.
 
@@ -18,7 +18,7 @@ The connections are blow, you draw connections ONLY according to this:
 
 1. [OpenStreetMap], [PostgreSQL/PostGIS] -> [Martin], [Nominatim], [Valhalla] -> [MapLibre]
 2. [Nominatim], [Valhalla] -> [MCP Server]
-3. [MapLibre] -> [Browser]
+3. [QGIS] -> [PostgreSQL/PostGIS] -> [GeoServer] -> [MapLibre] -> [WebBrowser]
 4. [MCP Server] -> [AI Agent]
 5. [IoT] -> [Kafka] -> [Message Processor] -> [Web Socket], [PostgreSQL/PostGIS], [GeoParquet]
 6. [Web Socket] -> [MapLibre]
