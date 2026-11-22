@@ -101,12 +101,11 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
   <path id="e-db-spark" class="edge ana" d="M360 835 H327" marker-end="url(#arrAna)"/>
   <path id="e-spark-ice" class="edge future" d="M240 870 V945 H358" marker-end="url(#arrFuture)"/>
   <path id="e-ice-gp" class="edge future" d="M530 945 H983" marker-end="url(#arrFuture)"/>
-  <path id="e-trino-ice" class="edge ana" d="M325 1055 H400 V982" marker-end="url(#arrAna)"/>
+  <path id="e-ice-trino" class="edge ana" d="M400 980 V1055 H327" marker-end="url(#arrAna)"/>
   <path id="e-osm-o2p" class="edge ana" d="M1060 760 V800" marker-end="url(#arrAna)"/>
   <path id="e-o2p-db" class="edge ana" d="M985 835 H660" marker-end="url(#arrAna)"/>
   <path id="e-db-om" class="edge gov" d="M620 870 V1235" marker-end="url(#arrGov)"/>
-  <path id="e-ice-om" class="edge gov" d="M490 980 V1235" marker-end="url(#arrGov)"/>
-  <path id="e-om-trino" class="edge gov" d="M300 1235 V1092" marker-end="url(#arrGov)"/>
+  <path id="e-trino-om" class="edge gov" d="M300 1090 V1235" marker-end="url(#arrGov)"/>
   <path id="e-om-mysql" class="edge gov" d="M250 1305 V1370" marker-end="url(#arrGov)"/>
   <path id="e-om-es" class="edge gov" d="M520 1305 V1370" marker-end="url(#arrGov)"/>
   <path id="e-om-airflow" class="edge gov" d="M790 1305 V1370" marker-end="url(#arrGov)"/>
@@ -158,7 +157,7 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
  <article class="card"><h2 style="color:#bcd6f5">Interactive <span class="tag ui">LAYER 1</span></h2><p>WebBrowser, MapLibre, AI Agent, MCP Server, IoT and QGIS. People reach the map through the browser; the AI Agent reaches GIS tools through the MCP Server; QGIS works on the spatial database; IoT devices originate the live event stream.</p></article>
  <article class="card"><h2 style="color:var(--op)">Business logic <span class="tag live">LAYER 2</span></h2><p>Martin, Nominatim, Valhalla and GeoServer serve tiles, geocoding, routing and OGC services. Kafka, the Message Processor and Web Socket carry live events to the map and to storage.</p></article>
  <article class="card"><h2 style="color:var(--ana)">Data lakehouse <span class="tag build">LAYER 3</span></h2><p>Three columns: the analytical engine (Spark/Sedona, Trino), structured data (PostgreSQL/PostGIS, Iceberg) and filesystem / object storage (Images, Videos, GeoParquet, Microsoft Office, OpenStreetMap, osm2pgsql).</p></article>
- <article class="card"><h2 style="color:var(--gov)">Data governance <span class="tag gov">LAYER 4</span></h2><p>OpenMetadata collects metadata from PostgreSQL/PostGIS, Iceberg and Kafka, and feeds MySQL, Elasticsearch and Airflow. Apache POI &amp; Tika extract content from Microsoft Office documents. Trino queries Iceberg on OpenMetadata&rsquo;s behalf. Apache Ranger sits in the layer.</p></article>
+ <article class="card"><h2 style="color:var(--gov)">Data governance <span class="tag gov">LAYER 4</span></h2><p>OpenMetadata collects metadata from PostgreSQL/PostGIS, Trino and Kafka, and feeds MySQL, Elasticsearch and Airflow. Trino reads Iceberg and passes its metadata on. Apache POI &amp; Tika extract content from Microsoft Office documents. Apache Ranger sits in the layer.</p></article>
 </section>
 
 <section class="key"><h3>Connections drawn</h3><ol>
@@ -170,10 +169,10 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
  <li>Web Socket → MapLibre</li>
  <li>PostgreSQL/PostGIS → Spark/Sedona → Iceberg → GeoParquet</li>
  <li>OpenStreetMap → osm2pgsql → PostgreSQL/PostGIS → OpenMetadata</li>
- <li>Iceberg, Kafka → OpenMetadata</li>
+ <li>Kafka → OpenMetadata</li>
  <li>Microsoft Office → Apache POI &amp; Tika → OpenMetadata</li>
  <li>OpenMetadata → Elasticsearch, Airflow, MySQL</li>
- <li>OpenMetadata → Trino → Iceberg</li>
+ <li>Iceberg → Trino → OpenMetadata</li>
 </ol></section>
 <p class="notes">Images, Videos and Apache Ranger appear in their layers without arrows because no connection was specified for them. PostgreSQL/PostGIS and GeoParquet are each a single component; every arrow to them is drawn to that one box. Where several sources feed several targets, the lines share a rail so the flow stays legible. A few line crossings remain where flows from different paths meet (the PostgreSQL/PostGIS to OpenMetadata line crosses the Iceberg to GeoParquet line).</p>
 <footer>Reference Architecture · Open source GIS platform · Self-contained HTML / SVG / CSS / JavaScript · No external libraries</footer>
@@ -181,7 +180,7 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
 <script>
 (()=>{
  const NS="http://www.w3.org/2000/svg",layer=document.getElementById("particles");
- const paths=[["e-osm-nom","map"],["e-osm-val","map"],["e-osm-martin","map"],["e-db-nom","map"],["e-db-val","map"],["e-db-martin","map"],["e-nom-ml","map"],["e-val-ml","map"],["e-martin-ml","map"],["e-nom-mcp","mcp"],["e-val-mcp","mcp"],["e-qgis-db","map"],["e-db-geo","map"],["e-geo-ml","map"],["e-ml-browser","map"],["e-mcp-agent","mcp"],["e-iot-kafka","op"],["e-kafka-mp","op"],["e-mp-ws","op"],["e-mp-db","op"],["e-mp-gp","op"],["e-ws-ml","op"],["e-db-spark","ana"],["e-spark-ice","future"],["e-ice-gp","future"],["e-osm-o2p","ana"],["e-o2p-db","ana"],["e-db-om","gov"],["e-ice-om","gov"],["e-kafka-om","gov"],["e-office-poi","gov"],["e-poi-om","gov"]];
+ const paths=[["e-osm-nom","map"],["e-osm-val","map"],["e-osm-martin","map"],["e-db-nom","map"],["e-db-val","map"],["e-db-martin","map"],["e-nom-ml","map"],["e-val-ml","map"],["e-martin-ml","map"],["e-nom-mcp","mcp"],["e-val-mcp","mcp"],["e-qgis-db","map"],["e-db-geo","map"],["e-geo-ml","map"],["e-ml-browser","map"],["e-mcp-agent","mcp"],["e-iot-kafka","op"],["e-kafka-mp","op"],["e-mp-ws","op"],["e-mp-db","op"],["e-mp-gp","op"],["e-ws-ml","op"],["e-db-spark","ana"],["e-spark-ice","future"],["e-ice-gp","future"],["e-ice-trino","ana"],["e-osm-o2p","ana"],["e-o2p-db","ana"],["e-db-om","gov"],["e-trino-om","gov"],["e-om-mysql","gov"],["e-om-es","gov"],["e-om-airflow","gov"],["e-kafka-om","gov"],["e-office-poi","gov"],["e-poi-om","gov"]];
  const group={map:"map",op:"op",mcp:"mcp",ana:"ana",future:"ana",gov:"gov"};
  const state={map:true,op:true,mcp:true,ana:true,gov:true},items=[];
  paths.forEach(([id,type])=>{const p=document.getElementById(id),len=p.getTotalLength(),n=Math.max(1,Math.round(len/260));for(let i=0;i<n;i++){const c=document.createElementNS(NS,"circle");c.setAttribute("r","4");c.setAttribute("class","particle "+type);layer.appendChild(c);items.push({el:c,path:p,len,type,g:group[type],offset:i/n});}});
