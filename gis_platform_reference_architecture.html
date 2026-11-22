@@ -22,7 +22,7 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
 <header>
  <div class="eyebrow">Open source GIS · Data lakehouse · Data governance</div>
  <h1>Reference Architecture: An Open Source GIS Platform with Data Lakehouse and Governance</h1>
- <p class="subtitle">Four layers from top to bottom: interactive, business logic, data lakehouse and data governance. The diagram draws only the twelve connection rules supplied.</p>
+ <p class="subtitle">Four layers from top to bottom: interactive, business logic, data lakehouse and data governance. The diagram draws only the thirteen connection rules supplied.</p>
  <div class="toolbar">
   <button id="play" class="active">Ⅱ Pause animation</button>
   <button id="mapToggle" class="active">✓ Map serving</button>
@@ -99,8 +99,8 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
   <path id="e-mp-gp" class="edge op" d="M1390 440 V520 H1220 V945 H1137" marker-end="url(#arrOp)"/>
   <path id="e-ws-ml" class="edge op" d="M1180 365 V225 H1045 V185" marker-end="url(#arrOp)"/>
   <path id="e-db-spark" class="edge ana" d="M360 835 H327" marker-end="url(#arrAna)"/>
-  <path id="e-spark-ice" class="edge future" d="M240 870 V945 H358" marker-end="url(#arrFuture)"/>
-  <path id="e-ice-gp" class="edge future" d="M530 945 H983" marker-end="url(#arrFuture)"/>
+  <path id="e-ice-spark" class="edge future" d="M358 945 H240 V872" marker-end="url(#arrFuture)"/>
+  <path id="e-gp-ice" class="edge future" d="M985 945 H532" marker-end="url(#arrFuture)"/>
   <path id="e-ice-trino" class="edge ana" d="M400 980 V1055 H327" marker-end="url(#arrAna)"/>
   <path id="e-osm-o2p" class="edge ana" d="M1060 760 V800" marker-end="url(#arrAna)"/>
   <path id="e-o2p-db" class="edge ana" d="M985 835 H660" marker-end="url(#arrAna)"/>
@@ -167,20 +167,21 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
  <li>MCP Server → AI Agent</li>
  <li>IoT → Kafka → Message Processor → Web Socket, PostgreSQL/PostGIS, GeoParquet</li>
  <li>Web Socket → MapLibre</li>
- <li>PostgreSQL/PostGIS → Spark/Sedona → Iceberg → GeoParquet</li>
+ <li>PostgreSQL/PostGIS → Spark/Sedona</li>
  <li>OpenStreetMap → osm2pgsql → PostgreSQL/PostGIS → OpenMetadata</li>
  <li>Kafka → OpenMetadata</li>
  <li>Microsoft Office → Apache POI &amp; Tika → OpenMetadata</li>
  <li>OpenMetadata → Elasticsearch, Airflow, MySQL</li>
  <li>Iceberg → Trino → OpenMetadata</li>
+ <li>GeoParquet → Iceberg → Spark/Sedona</li>
 </ol></section>
-<p class="notes">Images, Videos and Apache Ranger appear in their layers without arrows because no connection was specified for them. PostgreSQL/PostGIS and GeoParquet are each a single component; every arrow to them is drawn to that one box. Where several sources feed several targets, the lines share a rail so the flow stays legible. A few line crossings remain where flows from different paths meet (the PostgreSQL/PostGIS to OpenMetadata line crosses the Iceberg to GeoParquet line).</p>
+<p class="notes">Images, Videos and Apache Ranger appear in their layers without arrows because no connection was specified for them. PostgreSQL/PostGIS and GeoParquet are each a single component; every arrow to them is drawn to that one box. Where several sources feed several targets, the lines share a rail so the flow stays legible. A few line crossings remain where flows from different paths meet (the PostgreSQL/PostGIS to OpenMetadata line crosses the GeoParquet to Iceberg line).</p>
 <footer>Reference Architecture · Open source GIS platform · Self-contained HTML / SVG / CSS / JavaScript · No external libraries</footer>
 </main>
 <script>
 (()=>{
  const NS="http://www.w3.org/2000/svg",layer=document.getElementById("particles");
- const paths=[["e-osm-nom","map"],["e-osm-val","map"],["e-osm-martin","map"],["e-db-nom","map"],["e-db-val","map"],["e-db-martin","map"],["e-nom-ml","map"],["e-val-ml","map"],["e-martin-ml","map"],["e-nom-mcp","mcp"],["e-val-mcp","mcp"],["e-qgis-db","map"],["e-db-geo","map"],["e-geo-ml","map"],["e-ml-browser","map"],["e-mcp-agent","mcp"],["e-iot-kafka","op"],["e-kafka-mp","op"],["e-mp-ws","op"],["e-mp-db","op"],["e-mp-gp","op"],["e-ws-ml","op"],["e-db-spark","ana"],["e-spark-ice","future"],["e-ice-gp","future"],["e-ice-trino","ana"],["e-osm-o2p","ana"],["e-o2p-db","ana"],["e-db-om","gov"],["e-trino-om","gov"],["e-om-mysql","gov"],["e-om-es","gov"],["e-om-airflow","gov"],["e-kafka-om","gov"],["e-office-poi","gov"],["e-poi-om","gov"]];
+ const paths=[["e-osm-nom","map"],["e-osm-val","map"],["e-osm-martin","map"],["e-db-nom","map"],["e-db-val","map"],["e-db-martin","map"],["e-nom-ml","map"],["e-val-ml","map"],["e-martin-ml","map"],["e-nom-mcp","mcp"],["e-val-mcp","mcp"],["e-qgis-db","map"],["e-db-geo","map"],["e-geo-ml","map"],["e-ml-browser","map"],["e-mcp-agent","mcp"],["e-iot-kafka","op"],["e-kafka-mp","op"],["e-mp-ws","op"],["e-mp-db","op"],["e-mp-gp","op"],["e-ws-ml","op"],["e-db-spark","ana"],["e-ice-spark","future"],["e-gp-ice","future"],["e-ice-trino","ana"],["e-osm-o2p","ana"],["e-o2p-db","ana"],["e-db-om","gov"],["e-trino-om","gov"],["e-om-mysql","gov"],["e-om-es","gov"],["e-om-airflow","gov"],["e-kafka-om","gov"],["e-office-poi","gov"],["e-poi-om","gov"]];
  const group={map:"map",op:"op",mcp:"mcp",ana:"ana",future:"ana",gov:"gov"};
  const state={map:true,op:true,mcp:true,ana:true,gov:true},items=[];
  paths.forEach(([id,type])=>{const p=document.getElementById(id),len=p.getTotalLength(),n=Math.max(1,Math.round(len/260));for(let i=0;i<n;i++){const c=document.createElementNS(NS,"circle");c.setAttribute("r","4");c.setAttribute("class","particle "+type);layer.appendChild(c);items.push({el:c,path:p,len,type,g:group[type],offset:i/n});}});
