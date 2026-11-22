@@ -1,30 +1,33 @@
 This the HTML page you generated a few days ago.
 https://keslerzhu.github.io/keslerzhu/gis_platform_reference_architecture.html
-I want to use the same style and draw the GIS-platform architecutre as an html page titled "Reference Architecture: An Open Source GIS Platform with Data Lakehouse and Governance"
+I want to use the same style and draw the GIS-platform architecutre as an html page titled "AI-Ready Location Intelligence — A Unified Lakehouse & Governance Architecture"
 
 I use [ ] to denote components, use -> to denote data flow.
 There are 4 layers, from top to bottom they are:
-1. Interactive: contains [WebBrowser], [MapLibre], [AI Agent], [MCP Server], [IoT], [QGIS]
-2. Business logics: contains [Martin], [Nominatim], [Valhalla], [Kafka], [Message Processor], [Web Socket], [GeoServer]
+1. Interactive: contains [WebBrowser], [MapLibre], [AI Agent], [MCP Server], [IoT], [QGIS], [ERP], [CRM]
+2. Business logics: contains [Martin], [Nominatim], [Valhalla], [Kafka], [Flink], [WebSocket], [GeoServer], [Airflow]
 3. Data Lakehouse: contains 3 columns
-      Analytical engine: contains [Spark/Sedona], [Trino]
+      Analytical engine: contains [Spark], [Trino]
       Structured data: contains [PostgreSQL/PostGIS], [Iceberg]
-      Filesystem / Object storage: contains [Images], [Videos], [GeoParquet], [Microsoft Office], [OpenStreetMap], [osm2pgsql]
-4. Data Governance: contains [OpenMetadata], [Apache POI & Tika], [MySQL], [Elasticsearch], [Apache Ranger], [Airflow]
+      Extract & Transform: contains [Computer Vision], [OCR], [Apache Tika], [osm2pgsql]
+      Filesystem / Object storage: contains [Images], [Videos], [Parquet], [Microsoft Office], [OpenStreetMap], [PDF]
+4. Data Governance: contains [OpenMetadata], [MySQL], [Elasticsearch], [Apache Ranger]
 Draw a line between layers.
 
 The connections are blow, you draw connections ONLY according to this:
 
 1. [OpenStreetMap], [PostgreSQL/PostGIS] -> [Martin], [Nominatim], [Valhalla] -> [MapLibre]
-2. [Nominatim], [Valhalla] -> [MCP Server]
+2. [Nominatim], [Valhalla], [OpenMetadata], [Trino] -> [MCP Server]
 3. [QGIS] -> [PostgreSQL/PostGIS] -> [GeoServer] -> [MapLibre] -> [WebBrowser]
 4. [MCP Server] -> [AI Agent]
-5. [IoT] -> [Kafka] -> [Message Processor] -> [Web Socket], [PostgreSQL/PostGIS], [GeoParquet]
-6. [Web Socket] -> [MapLibre]
-7. [PostgreSQL/PostGIS] -> [Spark/Sedona]
+5. [IoT] -> [Kafka] -> [Flink] -> [WebSocket], [PostgreSQL/PostGIS]
+6. [WebSocket] -> [MapLibre]
+7. [PostgreSQL/PostGIS] -> [Spark] -> [Iceberg] ->[Parquet]
 8. [OpenStreetMap] -> [osm2pgsql] -> [PostgreSQL/PostGIS] -> [OpenMetadata]
 9. [Kafka] -> [OpenMetadata]
-10. [Microsoft Office] -> [Apache POI & Tika] -> [OpenMetadata]
-11. [OpenMetadata] -> [Elasticsearch], [Airflow], [MySQL]
-12. [Iceberg] -> [Trino] -> [OpenMetadata]
-13. [GeoParquet] -> [Iceberg] -> [Spark/Sedona]
+10. [Iceberg] -> [Trino] -> [OpenMetadata]
+11. [OpenMetadata] -> [Elasticsearch], [MySQL]
+12. [Images], [Videos] -> [Computer Vision] -> [Spark]
+13. [PDF] -> [OCR] -> [Spark]
+14. [Microsoft Office] -> [Apache Tika] -> [Spark]
+15. [ERP], [CRM] -> [Airflow] -> [Spark]
