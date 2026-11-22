@@ -7,10 +7,10 @@ There are 4 layers, from top to bottom they are:
 1. Interactive: contains [WebBrowser], [MapLibre], [AI Agent], [MCP Server], [IoT], [QGIS]
 2. Business logics: contains [Martin], [Nominatim], [Valhalla], [Kafka], [Message Processor], [Web Socket], [GeoServer]
 3. Data Lakehouse: contains 3 columns
-      Structured data: contains [PostgreSQL/PostGIS]
-      Analytical engine: contains [Spark/Sedona], [Iceberg]
+      Analytical engine: contains [Spark/Sedona], [Trino]
+      Structured data: contains [PostgreSQL/PostGIS], [Iceberg]
       Filesystem / Object storage: contains [Images], [Videos], [GeoParquet], [Microsoft Office], [OpenStreetMap], [osm2pgsql]
-4. Data Governance: contains [OpenMetadata], [Apache POI & Tika], [Apache Ranger], [Apache Gravitino]
+4. Data Governance: contains [OpenMetadata], [Apache POI & Tika], [MySQL], [Elasticsearch], [Apache Ranger], [Airflow]
 Draw a line between layers.
 
 The connections are blow, you draw connections ONLY according to this:
@@ -25,3 +25,5 @@ The connections are blow, you draw connections ONLY according to this:
 8. [OpenStreetMap] -> [osm2pgsql] -> [PostgreSQL/PostGIS] -> [OpenMetadata]
 9. [Iceberg], [Kafka] -> [OpenMetadata]
 10. [Microsoft Office] -> [Apache POI & Tika] -> [OpenMetadata]
+11. [OpenMetadata] -> [Elasticsearch], [Airflow], [MySQL]
+12. [OpenMetadata] -> [Trino] -> [Iceberg]
