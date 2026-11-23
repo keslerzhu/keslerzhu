@@ -1,17 +1,18 @@
 This the HTML page you generated a few days ago.
-https://keslerzhu.github.io/keslerzhu/gis_platform_reference_architecture.html
+https://keslerzhu.github.io/keslerzhu/ai_li.html
 I want to use the same style and draw the GIS-platform architecutre as an html page titled "AI-Ready Location Intelligence — A Unified Lakehouse & Governance Architecture"
 
 I use [ ] to denote components, use -> to denote data flow.
-There are 4 layers, from top to bottom they are:
+There are 5 layers, from top to bottom they are:
 1. Interactive: contains [WebBrowser], [MapLibre], [AI Agent], [MCP Server], [IoT], [QGIS], [ERP], [CRM]
-2. Business logics: contains [Martin], [Nominatim], [Valhalla], [Kafka], [Flink], [WebSocket], [GeoServer], [Airflow]
-3. Data Lakehouse: contains 3 columns
+2. Security: contains [Keycloak], [Apache Ranger]
+3. Business logics: contains [Martin], [Nominatim], [Valhalla], [Kafka], [Flink], [WebSocket], [GeoServer], [Airflow]
+4. Data Lakehouse: contains 3 columns
       Analytical engine: contains [Spark], [Trino]
       Structured data: contains [PostgreSQL/PostGIS], [Iceberg]
       Extract & Transform: contains [Computer Vision], [OCR], [Apache Tika], [osm2pgsql]
       Filesystem / Object storage: contains [Images], [Videos], [Parquet], [Microsoft Office], [OpenStreetMap], [PDF]
-4. Data Governance: contains [OpenMetadata], [MySQL], [Elasticsearch], [Apache Ranger]
+5. Data Governance: contains [OpenMetadata], [MySQL], [Elasticsearch]
 Draw a line between layers.
 
 The connections are blow, you draw connections ONLY according to this:
