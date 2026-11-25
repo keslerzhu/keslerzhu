@@ -58,7 +58,7 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
  <rect class="zone front" x="28" y="25" width="1644" height="190"/>
  <text class="zone-title" x="52" y="55">INTERACTIVE</text><text class="zone-sub" x="52" y="75">Where people, agents and devices connect</text>
  <rect class="zone sec" x="28" y="255" width="1644" height="160"/>
- <text class="zone-title" x="52" y="285" fill="#ffb3c0">SECURITY</text><text class="zone-sub" x="52" y="303">Identity and access control</text>
+ <text class="zone-title" x="52" y="285" fill="#ffb3c0">SECURITY</text><text class="zone-sub" x="52" y="303">Identity, access and gateway</text>
  <rect class="zone oper" x="28" y="455" width="1644" height="285"/>
  <text class="zone-title" x="52" y="485" fill="#8cf0c2">BUSINESS LOGIC</text><text class="zone-sub" x="52" y="503">Services and event processing</text>
  <rect class="zone anal" x="28" y="780" width="1644" height="710"/>
@@ -87,14 +87,15 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
   <path id="e-db-nom" class="edge map" d="M590 885 V675 H670 V640" marker-end="url(#arrMap)"/>
   <path id="e-db-val" class="edge map" d="M590 885 V675 H840 V640" marker-end="url(#arrMap)"/>
   <path id="e-db-martin" class="edge map" d="M590 885 V675 H1010 V640" marker-end="url(#arrMap)"/>
-  <path id="e-nom-ml" class="edge map" d="M640 565 V525 H1010 V185" marker-end="url(#arrMap)"/>
-  <path id="e-val-ml" class="edge map" d="M870 565 V525 H1010 V185" marker-end="url(#arrMap)"/>
-  <path id="e-martin-ml" class="edge map" d="M1010 565 V185" marker-end="url(#arrMap)"/>
+  <path id="e-nom-nginx" class="edge map" d="M640 565 V525 H1010 V395" marker-end="url(#arrMap)"/>
+  <path id="e-val-nginx" class="edge map" d="M870 565 V525 H1010 V395" marker-end="url(#arrMap)"/>
+  <path id="e-martin-nginx" class="edge map" d="M1010 565 V395" marker-end="url(#arrMap)"/>
   <path id="e-nom-mcp" class="edge mcp" d="M700 565 V545 H750 V185" marker-end="url(#arrMcp)"/>
   <path id="e-val-mcp" class="edge mcp" d="M810 565 V545 H750 V185" marker-end="url(#arrMcp)"/>
   <path id="e-qgis-db" class="edge map" d="M395 185 V885" marker-end="url(#arrMap)"/>
   <path id="e-db-geo" class="edge map" d="M450 885 V640" marker-end="url(#arrMap)"/>
-  <path id="e-geo-ml" class="edge map" d="M530 565 V490 H975 V185" marker-end="url(#arrMap)"/>
+  <path id="e-nginx-ml" class="edge map" d="M1010 325 V185" marker-end="url(#arrMap)"/>
+  <path id="e-geo-ml" class="edge map" d="M530 565 V490 H905 V225 H955 V185" marker-end="url(#arrMap)"/>
   <path id="e-ml-browser" class="edge map" d="M1080 148 H1138" marker-end="url(#arrMap)"/>
   <path id="e-mcp-agent" class="edge mcp" d="M690 148 H652" marker-end="url(#arrMcp)"/>
   <path id="e-iot-kafka" class="edge op" d="M1520 185 V565" marker-end="url(#arrOp)"/>
@@ -164,7 +165,8 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
  <g class="node gov" id="n-mysql"><rect x="175" y="1730" width="150" height="70"/><text class="title" x="250" y="1761" text-anchor="middle">MySQL</text><text class="sub" x="250" y="1782" text-anchor="middle">metadata store</text></g>
  <g class="node gov" id="n-es"><rect x="445" y="1730" width="150" height="70"/><text class="title" x="520" y="1761" text-anchor="middle">Elasticsearch</text><text class="sub" x="520" y="1782" text-anchor="middle">search index</text></g>
  <g class="node sec" id="n-keycloak"><rect x="450" y="325" width="150" height="70"/><text class="title" x="525" y="356" text-anchor="middle">Keycloak</text><text class="sub" x="525" y="377" text-anchor="middle">identity provider</text></g>
- <g class="node sec" id="n-ranger"><rect x="790" y="325" width="150" height="70"/><text class="title" x="865" y="356" text-anchor="middle">Apache Ranger</text><text class="sub" x="865" y="377" text-anchor="middle">access control</text></g>
+ <g class="node sec" id="n-nginx"><rect x="935" y="325" width="150" height="70"/><text class="title" x="1010" y="356" text-anchor="middle">NGINX</text><text class="sub" x="1010" y="377" text-anchor="middle">reverse proxy</text></g>
+ <g class="node sec" id="n-ranger"><rect x="1230" y="325" width="150" height="70"/><text class="title" x="1305" y="356" text-anchor="middle">Apache Ranger</text><text class="sub" x="1305" y="377" text-anchor="middle">access control</text></g>
  <g id="particles"></g>
  </svg>
  </div>
@@ -172,14 +174,14 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
 
 <section class="cards">
  <article class="card"><h2 style="color:#bcd6f5">Interactive <span class="tag ui">LAYER 1</span></h2><p>WebBrowser, MapLibre, AI Agent, MCP Server, IoT, QGIS, ERP and CRM. People reach the map through the browser; the AI Agent reaches GIS, catalog and SQL tools through the MCP Server; QGIS works on the spatial database; IoT devices originate the live event stream.</p></article>
- <article class="card"><h2 style="color:#ffb3c0">Security <span class="tag" style="color:#ffc2cd;background:#40202a">LAYER 2</span></h2><p>Keycloak and Apache Ranger. The rules specify no data flows for them, so they appear without arrows.</p></article>
+ <article class="card"><h2 style="color:#ffb3c0">Security <span class="tag" style="color:#ffc2cd;background:#40202a">LAYER 2</span></h2><p>Keycloak, Apache Ranger and NGINX. NGINX sits between the map services and MapLibre; the rules specify no data flows for Keycloak or Apache Ranger, so they appear without arrows.</p></article>
  <article class="card"><h2 style="color:var(--op)">Business logic <span class="tag live">LAYER 3</span></h2><p>Martin, Nominatim, Valhalla and GeoServer serve tiles, geocoding, routing and OGC services. Kafka, Flink and WebSocket carry live events to the map and to storage. Airflow brings ERP and CRM data into Spark.</p></article>
  <article class="card"><h2 style="color:var(--ana)">Data lakehouse <span class="tag build">LAYER 4</span></h2><p>Four columns: Analytical engine (Spark, Trino), Structured data (PostgreSQL/PostGIS, Iceberg), Extract &amp; Transform (Computer Vision, OCR, Apache Tika, osm2pgsql) and Filesystem / Object storage (Images, Videos, Parquet, Microsoft Office, OpenStreetMap, PDF).</p></article>
  <article class="card" style="grid-column:1/-1"><h2 style="color:var(--gov)">Data governance <span class="tag gov">LAYER 5</span></h2><p>OpenMetadata collects metadata from PostgreSQL/PostGIS, Trino and Kafka, and feeds MySQL and Elasticsearch. It also serves the MCP Server.</p></article>
 </section>
 
 <section class="key"><h3>Connections drawn</h3><ol>
- <li>OpenStreetMap, PostgreSQL/PostGIS → Martin, Nominatim, Valhalla → MapLibre</li>
+ <li>OpenStreetMap, PostgreSQL/PostGIS → Martin, Nominatim, Valhalla → NGINX → MapLibre</li>
  <li>Nominatim, Valhalla, OpenMetadata, Trino → MCP Server</li>
  <li>QGIS → PostgreSQL/PostGIS → GeoServer → MapLibre → WebBrowser</li>
  <li>MCP Server → AI Agent</li>
@@ -195,13 +197,13 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
  <li>Microsoft Office → Apache Tika → Spark</li>
  <li>ERP, CRM → Airflow → Spark</li>
 </ol></section>
-<p class="notes">Keycloak and Apache Ranger have no connections in the rules, so they appear without arrows. Where several sources feed several targets, or several extractors feed Spark, the lines share a rail so the flow stays legible. Lines from the interactive layer to the business logic layer pass straight through the security layer. Some line crossings remain where flows from different paths meet.</p>
+<p class="notes">Keycloak and Apache Ranger have no connections in the rules, so they appear without arrows. Where several sources feed several targets, or several extractors feed Spark, the lines share a rail so the flow stays legible. Lines from the interactive layer to the business logic layer pass through the security layer. Some line crossings remain where flows from different paths meet.</p>
 <footer>Reference Architecture · Open source GIS platform · Self-contained HTML / SVG / CSS / JavaScript · No external libraries</footer>
 </main>
 <script>
 (()=>{
  const NS="http://www.w3.org/2000/svg",layer=document.getElementById("particles");
- const paths=[["e-osm-nom","map"],["e-osm-val","map"],["e-osm-martin","map"],["e-db-nom","map"],["e-db-val","map"],["e-db-martin","map"],["e-nom-ml","map"],["e-val-ml","map"],["e-martin-ml","map"],["e-nom-mcp","mcp"],["e-val-mcp","mcp"],["e-qgis-db","map"],["e-db-geo","map"],["e-geo-ml","map"],["e-ml-browser","map"],["e-mcp-agent","mcp"],["e-iot-kafka","op"],["e-kafka-mp","op"],["e-mp-ws","op"],["e-mp-db","op"],["e-ws-ml","op"],["e-db-spark","ana"],["e-spark-ice","future"],["e-ice-pq","future"],["e-osm-o2p","ana"],["e-o2p-db","ana"],["e-db-om","gov"],["e-kafka-om","gov"],["e-om-mcp","mcp"],["e-trino-mcp","mcp"],["e-ice-trino","ana"],["e-trino-om","gov"],["e-om-mysql","gov"],["e-om-es","gov"],["e-img-cv","ana"],["e-vid-cv","ana"],["e-cv-spark","ana"],["e-pdf-ocr","ana"],["e-ocr-spark","ana"],["e-office-tika","ana"],["e-erp-airflow","ana"],["e-crm-airflow","ana"],["e-airflow-spark","ana"],["e-tika-spark","ana"]];
+ const paths=[["e-osm-nom","map"],["e-osm-val","map"],["e-osm-martin","map"],["e-db-nom","map"],["e-db-val","map"],["e-db-martin","map"],["e-nom-nginx","map"],["e-val-nginx","map"],["e-martin-nginx","map"],["e-nom-mcp","mcp"],["e-val-mcp","mcp"],["e-qgis-db","map"],["e-db-geo","map"],["e-nginx-ml","map"],["e-geo-ml","map"],["e-ml-browser","map"],["e-mcp-agent","mcp"],["e-iot-kafka","op"],["e-kafka-mp","op"],["e-mp-ws","op"],["e-mp-db","op"],["e-ws-ml","op"],["e-db-spark","ana"],["e-spark-ice","future"],["e-ice-pq","future"],["e-osm-o2p","ana"],["e-o2p-db","ana"],["e-db-om","gov"],["e-kafka-om","gov"],["e-om-mcp","mcp"],["e-trino-mcp","mcp"],["e-ice-trino","ana"],["e-trino-om","gov"],["e-om-mysql","gov"],["e-om-es","gov"],["e-img-cv","ana"],["e-vid-cv","ana"],["e-cv-spark","ana"],["e-pdf-ocr","ana"],["e-ocr-spark","ana"],["e-office-tika","ana"],["e-erp-airflow","ana"],["e-crm-airflow","ana"],["e-airflow-spark","ana"],["e-tika-spark","ana"]];
  const group={map:"map",op:"op",mcp:"mcp",ana:"ana",future:"ana",gov:"gov"};
  const state={map:true,op:true,mcp:true,ana:true,gov:true},items=[];
  paths.forEach(([id,type])=>{const p=document.getElementById(id),len=p.getTotalLength(),n=Math.max(1,Math.round(len/260));for(let i=0;i<n;i++){const c=document.createElementNS(NS,"circle");c.setAttribute("r","4");c.setAttribute("class","particle "+type);layer.appendChild(c);items.push({el:c,path:p,len,type,g:group[type],offset:i/n});}});
