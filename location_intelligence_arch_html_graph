@@ -5,7 +5,7 @@ I want to use the same style and draw the GIS-platform architecutre as an html p
 I use [ ] to denote components, use -> to denote data flow.
 There are 5 layers, from top to bottom they are:
 1. Interactive: contains [WebBrowser], [MapLibre], [AI Agent], [MCP Server], [IoT], [QGIS], [ERP], [CRM]
-2. Security: contains [Keycloak], [Apache Ranger], [NGINX]
+2. Security: contains [Keycloak], [Apache Ranger], [NGINX], [PKI/CA]
 3. Business logics: contains [Martin], [Nominatim], [Valhalla], [Kafka], [Flink], [WebSocket], [GeoServer], [Airflow]
 4. Data Lakehouse: contains 3 columns
       Analytical engine: contains [Spark], [Trino]
