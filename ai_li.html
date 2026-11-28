@@ -166,7 +166,8 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
  <g class="node gov" id="n-es"><rect x="445" y="1730" width="150" height="70"/><text class="title" x="520" y="1761" text-anchor="middle">Elasticsearch</text><text class="sub" x="520" y="1782" text-anchor="middle">search index</text></g>
  <g class="node sec" id="n-keycloak"><rect x="450" y="325" width="150" height="70"/><text class="title" x="525" y="356" text-anchor="middle">Keycloak</text><text class="sub" x="525" y="377" text-anchor="middle">identity provider</text></g>
  <g class="node sec" id="n-nginx"><rect x="935" y="325" width="150" height="70"/><text class="title" x="1010" y="356" text-anchor="middle">NGINX</text><text class="sub" x="1010" y="377" text-anchor="middle">reverse proxy</text></g>
- <g class="node sec" id="n-ranger"><rect x="1230" y="325" width="150" height="70"/><text class="title" x="1305" y="356" text-anchor="middle">Apache Ranger</text><text class="sub" x="1305" y="377" text-anchor="middle">access control</text></g>
+ <g class="node sec" id="n-ranger"><rect x="1210" y="325" width="130" height="70"/><text class="title" x="1275" y="356" text-anchor="middle">Apache Ranger</text><text class="sub" x="1275" y="377" text-anchor="middle">access control</text></g>
+ <g class="node sec" id="n-pki"><rect x="1360" y="325" width="130" height="70"/><text class="title" x="1425" y="356" text-anchor="middle">PKI / CA</text><text class="sub" x="1425" y="377" text-anchor="middle">certificate authority</text></g>
  <g id="particles"></g>
  </svg>
  </div>
@@ -174,7 +175,7 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
 
 <section class="cards">
  <article class="card"><h2 style="color:#bcd6f5">Interactive <span class="tag ui">LAYER 1</span></h2><p>WebBrowser, MapLibre, AI Agent, MCP Server, IoT, QGIS, ERP and CRM. People reach the map through the browser; the AI Agent reaches GIS, catalog and SQL tools through the MCP Server; QGIS works on the spatial database; IoT devices originate the live event stream.</p></article>
- <article class="card"><h2 style="color:#ffb3c0">Security <span class="tag" style="color:#ffc2cd;background:#40202a">LAYER 2</span></h2><p>Keycloak, Apache Ranger and NGINX. NGINX sits between the map services and MapLibre; the rules specify no data flows for Keycloak or Apache Ranger, so they appear without arrows.</p></article>
+ <article class="card"><h2 style="color:#ffb3c0">Security <span class="tag" style="color:#ffc2cd;background:#40202a">LAYER 2</span></h2><p>Keycloak, Apache Ranger, NGINX and PKI/CA. NGINX sits between the map services and MapLibre; the rules specify no data flows for Keycloak, Apache Ranger or PKI/CA, so they appear without arrows.</p></article>
  <article class="card"><h2 style="color:var(--op)">Business logic <span class="tag live">LAYER 3</span></h2><p>Martin, Nominatim, Valhalla and GeoServer serve tiles, geocoding, routing and OGC services. Kafka, Flink and WebSocket carry live events to the map and to storage. Airflow brings ERP and CRM data into Spark.</p></article>
  <article class="card"><h2 style="color:var(--ana)">Data lakehouse <span class="tag build">LAYER 4</span></h2><p>Four columns: Analytical engine (Spark, Trino), Structured data (PostgreSQL/PostGIS, Iceberg), Extract &amp; Transform (Computer Vision, OCR, Apache Tika, osm2pgsql) and Filesystem / Object storage (Images, Videos, Parquet, Microsoft Office, OpenStreetMap, PDF).</p></article>
  <article class="card" style="grid-column:1/-1"><h2 style="color:var(--gov)">Data governance <span class="tag gov">LAYER 5</span></h2><p>OpenMetadata collects metadata from PostgreSQL/PostGIS, Trino and Kafka, and feeds MySQL and Elasticsearch. It also serves the MCP Server.</p></article>
@@ -197,7 +198,7 @@ main{max-width:1500px;margin:auto;padding:0 clamp(10px,2.5vw,34px) 36px}.frame{b
  <li>Microsoft Office → Apache Tika → Spark</li>
  <li>ERP, CRM → Airflow → Spark</li>
 </ol></section>
-<p class="notes">Keycloak and Apache Ranger have no connections in the rules, so they appear without arrows. Where several sources feed several targets, or several extractors feed Spark, the lines share a rail so the flow stays legible. Lines from the interactive layer to the business logic layer pass through the security layer. Some line crossings remain where flows from different paths meet.</p>
+<p class="notes">Keycloak, Apache Ranger and PKI/CA have no connections in the rules, so they appear without arrows. Where several sources feed several targets, or several extractors feed Spark, the lines share a rail so the flow stays legible. Lines from the interactive layer to the business logic layer pass through the security layer. Some line crossings remain where flows from different paths meet.</p>
 <footer>Reference Architecture · Open source GIS platform · Self-contained HTML / SVG / CSS / JavaScript · No external libraries</footer>
 </main>
 <script>
